@@ -1,0 +1,14 @@
+@import 'assets/css/template.scss';
+
+.header {
+  background-color: #fff;
+  height: 100%;
+  min-height: 56px;
+  box-shadow: inset 0px -1px 1px $c_border;
+}
+
+.container {
+  min-height: 56px;
+  display: flex !important;
+  align-items: center;
+}

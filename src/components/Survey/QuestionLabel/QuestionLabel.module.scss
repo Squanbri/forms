@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-basis: 50%;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.textField {
+  width: 48%;
+}
+
+.select {
+  width: 48%;
+}
