@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { surveySlice } from 'store/reducers/SurveySlice';
 import styles from './SurveyTools.module.scss';
 

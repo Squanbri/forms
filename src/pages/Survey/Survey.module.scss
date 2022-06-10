@@ -1,34 +1,15 @@
 @import 'assets/css/template.scss';
 
-.title {
-  padding: 0 !important;
-  margin-left: 25px !important;
-  margin-bottom: 25px !important;
-
-  input {
-    padding: 0;
-    font-size: 32px;
-
-    &:focus {
-      border-bottom: $b_border;
-    }
-  }
-  fieldset {
-    opacity: 0;
-  }
-}
-
 .survey {
   position: relative;
   background-color: $c_white;
   border-radius: 10px;
-  padding: 25px 0;
   border: $b_border;
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-bottom: 25px;
   padding: 0 25px;
 }

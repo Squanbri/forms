@@ -8,7 +8,7 @@ const Routes = () => {
 
   return (
     <main>
-      <Container maxWidth='sm'>
+      <Container maxWidth='sm' style={{ height: '100%' }}>
         {routing}
       </Container>
     </main>

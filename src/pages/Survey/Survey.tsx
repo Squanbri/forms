@@ -1,52 +1,33 @@
-import { ChangeEvent, FC } from 'react';
-import { TextField, Button } from '@mui/material';
+import { FC } from 'react';
+import { Button } from '@mui/material';
 
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { surveySlice } from 'store/reducers/SurveySlice';
+import { useAppSelector } from 'hooks/redux';
 import SurveyTools from 'components/Survey/SurveyTools/SurveyTools';
-import Question from 'components/Survey/Question/Question';
-
+import SurveyTitle from 'components/Survey/SurveyTitle/SurveyTitle';
+import QuestionList from './QuestionList';
 import styles from './Survey.module.scss';
 
 const Survey: FC = () => {
-  const { title, questions } = useAppSelector(state => state.surveyReducer);
-  const { setTitle, selectEditableQuestion } = surveySlice.actions;
-  const dispatch = useAppDispatch();
-
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setTitle(event.target.value));
-  }
-
-  const onClickTitle = () => {
-    dispatch(selectEditableQuestion(null));
-  }
+  const { isEditMode } = useAppSelector((state) => state.surveyReducer);
 
   return (
     <section className={styles.survey}>
-      <TextField 
-        className={styles.title}
-        value={title}
-        onChange={onChangeTitle}
-        onClick={onClickTitle}
-      >
-        Название опроса
-      </TextField>
+      <form action=''>
+        <SurveyTitle />
 
-      {questions.map((question, index) => 
-        <Question 
-          key={index}
-          type={question.type}
-          question={question}
-          index={index}
-        />
-      )}
-    
-      <div className={styles.buttons}>
-        <Button variant='contained'>Отправить</Button>
-        <Button variant="text">Очистить форму</Button>
-      </div>
+        <QuestionList />
 
-      <SurveyTools/>
+        {isEditMode ? (
+          <SurveyTools />
+        ) : (
+          <div className={styles.buttons}>
+            <Button variant='contained'>Отправить</Button>
+            <Button variant='text' type='reset'>
+              Очистить форму
+            </Button>
+          </div>
+        )}
+      </form>
     </section>
   );
 };

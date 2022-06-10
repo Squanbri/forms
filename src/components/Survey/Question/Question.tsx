@@ -15,13 +15,13 @@ const Question: FC<QuestionProps> = ({
   question,
   index,
 }) => {  
-  const { editableQuestion } = useAppSelector(state => state.surveyReducer);
+  const { isEditMode, editableQuestion } = useAppSelector(state => state.surveyReducer);
   const { selectEditableQuestion } = surveySlice.actions;
   const dispatch = useAppDispatch();
 
   const readElement = questionTypeComponents[type].read;
   const editElement = questionTypeComponents[type].edit;
-  const isEditMode = index === editableQuestion;
+  const isEditQuestion = index === editableQuestion;
 
   const onClickQuestion = () => {
     dispatch(selectEditableQuestion(index));
@@ -32,7 +32,7 @@ const Question: FC<QuestionProps> = ({
     [styles.editableContainer]: true
   });
 
-  if (isEditMode) {
+  if (isEditQuestion && isEditMode) {
     return (
       <div 
         onClick={onClickQuestion}

@@ -6,12 +6,12 @@ import { QuestionTypeElement } from './types';
 
 export const typeList: QuestionTypeElement[] = [
   {
-    label: 'Строка',
+    label: 'Текст(Строка)',
     value: 'text',
     initialValue: initialValuesTextField
   },
   {
-    label: 'Текст',
+    label: 'Текст(Абзац)',
     value: 'textarea',
     initialValue: initialValuesTextField
   },
@@ -23,6 +23,16 @@ export const typeList: QuestionTypeElement[] = [
   {
     label: 'Несколько из списка',
     value: 'checkbox',
+    initialValue: initialValuesCheckbox
+  },
+  {
+    label: 'Выпадающий список',
+    value: 'dropdown',
+    initialValue: initialValuesCheckbox
+  },
+  {
+    label: 'Дата',
+    value: 'date',
     initialValue: initialValuesCheckbox
   },
 ];

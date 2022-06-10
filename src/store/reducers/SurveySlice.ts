@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IQuestion } from 'components/Survey/Question/types';
 
 interface SurveyState {
+  isEditMode: boolean,
   title: string,
   editableQuestion: number | null,
   questions: IQuestion[],
@@ -14,6 +15,7 @@ interface setQuestionPropertyArguments {
 }
 
 const initialState: SurveyState = {
+  isEditMode: false,
   title: 'Название опроса',
   editableQuestion: null,
   questions: [

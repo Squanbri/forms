@@ -20,7 +20,7 @@ const Radio: FC<RadioProps> = ({ question = 'Без названия', items }) 
           {items?.map((item, index) => (
             <FormControlLabel
               key={index}
-              value='female'
+              value={item.text}
               control={<RadioMUI size='small' />}
               label={item.text}
             />
