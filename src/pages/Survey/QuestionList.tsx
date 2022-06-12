@@ -6,7 +6,7 @@ const QuestionList = () => {
   
   return (
     <>
-     {questions.map((question, index) => 
+     {questions?.map((question, index) => 
         <Question 
           key={index}
           type={question.type}

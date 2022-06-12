@@ -1,0 +1,53 @@
+@import 'assets/css/template.scss';
+
+.myForms {
+  height: 100%;
+  background-color: $c_white;
+  border-radius: 10px;
+  border: $b_border;
+}
+
+.header {
+  height: 160px;
+  border-bottom: $b_border;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.formType {
+  width: 100%;
+
+  &:nth-child(2),
+  &:nth-child(3) {
+    opacity: .5;
+    pointer-events: none;
+  }
+}
+
+.formTypeCard {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  cursor: pointer;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+
+  &:hover {
+    box-shadow: 0px 4px 20px rgb(170 180 190 / 30%);
+  }
+}
+
+.formTypeName {
+  font-size: 16px;
+}
+
+.formTypeIcon {
+  font-size: 82px !important;
+  font-weight: 800;
+}

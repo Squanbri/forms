@@ -3,60 +3,33 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IQuestion } from 'components/Survey/Question/types';
 
 interface SurveyState {
-  isEditMode: boolean,
-  title: string,
-  editableQuestion: number | null,
-  questions: IQuestion[],
-}
-
-interface setQuestionPropertyArguments {
-  index: number,
-  value: object
+  isEditMode: boolean;
+  formId: string;
+  title: string;
+  editableQuestion: number | null;
+  questions: IQuestion[];
 }
 
 const initialState: SurveyState = {
+  formId: '',
   isEditMode: false,
   title: 'Название опроса',
   editableQuestion: null,
-  questions: [
-    {
-      type: 'text',
-      question: {
-        question: 'Вопрос1',
-        placeholder: 'Подсказка1'
-      }
-    },
-    {
-      type: 'radio',
-      question: {
-        question: 'Вопрос2',
-        items: [
-          { text: 'Вариант 1' },
-          { text: 'Вариант 2' },
-          { text: 'Вариант 3' },
-        ]
-      }
-    },
-    {
-      type: 'checkbox',
-      question: {
-        question: 'Вопрос3',
-        items: [
-          { text: 'Вариант 1' },
-          { text: 'Вариант 2' },
-          { text: 'Вариант 3' },
-        ]
-      }
-    },
-  ],
+  questions: [],
 }
 
 export const surveySlice = createSlice({
   name: 'survey',
   initialState,
   reducers: {
+    setSurvey(state, action: PayloadAction<SurveyState>) {
+      state.formId = action.payload.formId;
+      state.isEditMode = action.payload.isEditMode;
+      state.title = action.payload.title;
+      state.editableQuestion = null;
+      state.questions = action.payload.questions ?? [];
+    },
     setTitle(state, action: PayloadAction<string>) {
-      console.log(state)
       state.title = action.payload;
     },
     addQuestion(state, action: PayloadAction<IQuestion>) {
@@ -76,7 +49,10 @@ export const surveySlice = createSlice({
 
       state.editableQuestion = null;
     },
-    setQuestionProperty(state, action: PayloadAction<setQuestionPropertyArguments>) {
+    setQuestionProperty(
+      state, 
+      action: PayloadAction<{index: number, value: object}>
+    ) {
       state.questions[action.payload.index] = { 
         ...state.questions[action.payload.index], 
         ...action.payload.value

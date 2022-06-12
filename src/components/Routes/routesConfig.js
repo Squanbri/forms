@@ -1,5 +1,9 @@
-import { staticLinks } from 'assets/exportData/links';
+import { dynamicLinks, staticLinks } from 'assets/exportData/links';
 import Auth from 'pages/Auth/Auth';
+import ConfirmEmail from 'pages/ConfirmEmail/ConfirmEmail';
+import Main from 'pages/Main/Main';
+import MyForms from 'pages/MyForms/MyForms';
+import NotFound from 'pages/NotFound/NotFound';
 import Register from 'pages/Register/Register';
 import Survey from 'pages/Survey/Survey';
 
@@ -10,9 +14,20 @@ import Survey from 'pages/Survey/Survey';
 
 export const publicRoutes = [
   {
-    path: staticLinks.survey,
+    path: staticLinks.main,
+    element: <Main />,
+  },
+  {
+    path: staticLinks.form,
     element: <Survey />,
   },
+  {
+    path: '*',
+    element: <NotFound/>
+  }
+];
+
+export const unauthRoutes = [
   {
     path: staticLinks.auth,
     element: <Auth />,
@@ -20,5 +35,16 @@ export const publicRoutes = [
   {
     path: staticLinks.register,
     element: <Register />,
+  },
+  {
+    path: staticLinks.confirmEmail,
+    element: <ConfirmEmail />,
+  },
+];
+
+export const authRoutes = [
+  {
+    path: staticLinks.myForms,
+    element: <MyForms />,
   },
 ];

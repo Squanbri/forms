@@ -13,12 +13,23 @@
   justify-content: space-between;
 }
 
+.logoLink {
+  color: $c_black;
+
+  h1 {
+    background: linear-gradient(to right, #007FFF, #0059B2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 .list {
   display: flex;
   gap: 20px;
 }
 
 .navLink {
+  display: block;
   color: $c_black;
   font-size: 18px;
   font-weight: bold;
@@ -28,6 +39,23 @@
 
   &:hover {
     background-color: rgb(243, 246, 249);
+    color: rgb(62, 80, 96);
+  }
+}
+
+.signOut {
+  display: block;
+  color: $c_black;
+  font-size: 18px;
+  font-weight: bold;
+
+  padding: 10px;
+  border-radius: 10px;
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(249, 245, 243);
     color: rgb(62, 80, 96);
   }
 }

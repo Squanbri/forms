@@ -104,12 +104,13 @@ const Radio: FC<RadioProps> = ({ question = 'Без названия', items, in
           ))}
 
           <li>
-            <button 
+            <input 
               className={styles.radioAddBtn}
-              onClick={onAddOpinion}
+              // onClick={onAddOpinion}
+              type='text'
             >
               Добавить вариант
-            </button>
+            </input>
           </li>
         </RadioGroup>
       </FormControl>

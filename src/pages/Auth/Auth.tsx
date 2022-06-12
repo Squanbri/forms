@@ -1,19 +1,40 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { FC, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { staticLinks } from 'assets/exportData/links';
+import { useLoginMutation } from 'services/AuthService';
 import styles from './Auth.module.scss';
+import { useAppDispatch } from 'hooks/redux';
+import { authSlice } from 'store/reducers/AuthSlice';
+import { IError } from 'models/errorInterface';
 
 const Auth: FC = () => {
+  const navigate = useNavigate();
+  const { setCredentials } = authSlice.actions;
+  const dispatch = useAppDispatch();
+  const [login] = useLoginMutation();
+  const [error, setError] = useState('');
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (credentials) => {
+      const response = await login(credentials);
+      
+      if ('data' in response) {
+        dispatch(setCredentials(response.data.access_token));
+        navigate(staticLinks.main);
+      } else {
+        const newError = response.error as IError;
+        
+        if (typeof newError.data.message === 'string') {
+          setError(newError.data.message);
+        }
+      }
     },
   });
 
@@ -42,6 +63,10 @@ const Auth: FC = () => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
+
+        {error && 
+          <span className={styles.errorMessage}>{error}</span>
+        }
 
         <Button variant='contained' size='large' type='submit'>
           Войти

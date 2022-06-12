@@ -29,6 +29,12 @@
   }
 }
 
+.errorMessage {
+  margin-top: -20px;
+  margin-right: auto;
+  color: #f44336;
+}
+
 .auth {
   color: $c_black;
   text-transform: uppercase;
@@ -45,4 +51,16 @@
     text-decoration: none;
     background-color: rgba(25, 118, 210, 0.04);
   }
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: $c_white;
+  padding: 25px;
+  border-radius: 10px;
+  border: $b_border;
 }

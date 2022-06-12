@@ -107,6 +107,7 @@ const CheckBox: FC<CheckBoxProps> = ({ question = 'Без названия', ite
             <button 
               className={styles.radioAddBtn}
               onClick={onAddOpinion}
+              type='button'
             >
               Добавить вариант
             </button>

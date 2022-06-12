@@ -1,32 +1,44 @@
-import { FC } from 'react';
-import { Button } from '@mui/material';
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { useAppSelector } from 'hooks/redux';
-import SurveyTools from 'components/Survey/SurveyTools/SurveyTools';
+import { useGetFormQuery } from 'services/FormService';
 import SurveyTitle from 'components/Survey/SurveyTitle/SurveyTitle';
 import QuestionList from './QuestionList';
+import SurveyButtons from './SurveyButtons';
+import { surveySlice } from 'store/reducers/SurveySlice';
+import { useAppDispatch } from 'hooks/redux';
 import styles from './Survey.module.scss';
 
 const Survey: FC = () => {
-  const { isEditMode } = useAppSelector((state) => state.surveyReducer);
+  const { id } = useParams() as { id: string };
+  const { setSurvey } = surveySlice.actions;
+  const dispatch = useAppDispatch();
+  const { data, isLoading } = useGetFormQuery(id);
+
+  useEffect(() => {
+    if (data !== undefined) {
+      console.log(data.id)
+      dispatch(setSurvey({
+        formId: data.id,
+        isEditMode: data.userId,
+        title: data.content.title,
+        editableQuestion: null,
+        questions: data.content.questions
+      }))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
+  if (isLoading) return <div>Загрузка...</div>
 
   return (
     <section className={styles.survey}>
-      <form action=''>
+      <form>
         <SurveyTitle />
 
         <QuestionList />
 
-        {isEditMode ? (
-          <SurveyTools />
-        ) : (
-          <div className={styles.buttons}>
-            <Button variant='contained'>Отправить</Button>
-            <Button variant='text' type='reset'>
-              Очистить форму
-            </Button>
-          </div>
-        )}
+        <SurveyButtons />
       </form>
     </section>
   );
