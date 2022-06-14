@@ -28,6 +28,15 @@ export const formApi = createApi({
         }
       })
     }),
+    getMyForms: build.query<IForm[], void>({
+      query: () => ({
+        url: '/forms/myForms',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${localStorage.getItem('token_auth')}`
+        }
+      })
+    }),
     addForm: build.mutation<IForm, IFormContent>({
       query: (form) => ({
         url: '/forms',
@@ -56,6 +65,7 @@ export const formApi = createApi({
 
 export const {
   useGetFormQuery,
+  useGetMyFormsQuery,
   useAddFormMutation,
   useUpdateFormMutation
 } = formApi;

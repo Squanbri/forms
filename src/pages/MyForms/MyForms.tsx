@@ -1,14 +1,16 @@
 import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Paper } from '@mui/material';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Paper, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import FormatListNumberedOutlinedIcon from '@mui/icons-material/FormatListNumberedOutlined';
 
 import styles from './MyFroms.module.scss';
-import { useAddFormMutation } from 'services/FormService';
+import { useAddFormMutation, useGetMyFormsQuery } from 'services/FormService';
 import { dynamicLinks } from 'assets/exportData/links';
 
 const MyForms: FC = () => {
   const navigate = useNavigate();
+  const { data: myForms } = useGetMyFormsQuery();
   const [createForm, { data }] = useAddFormMutation();
 
   const onAddSurvey = () => {
@@ -23,7 +25,7 @@ const MyForms: FC = () => {
     if (data) {
       navigate(dynamicLinks.form(data.id));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
@@ -54,7 +56,26 @@ const MyForms: FC = () => {
           <span className={styles.formTypeName}>Тест</span>
         </div>
       </header>
-      <div></div>
+      <div>
+        <Typography className={styles.myFormsBodyTitle}>
+          Мои формы
+        </Typography>
+
+        <div className={styles.myFormsBody}>
+          {myForms?.map(form => 
+            <div className={styles.myFormCard} key={form.id}>
+              <NavLink to={dynamicLinks.form(form.id)}>
+                <Paper variant='outlined' className={styles.formTypeCard}>
+                  <FormatListNumberedOutlinedIcon 
+                    className={styles.formTypeIcon} 
+                  />
+                </Paper>
+              </NavLink>
+              <span className={styles.formTypeName}>{form?.content?.title}</span>
+            </div>
+          )}
+        </div>
+      </div>
     </section>
   );
 };

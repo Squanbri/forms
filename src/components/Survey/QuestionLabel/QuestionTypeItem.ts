@@ -27,7 +27,7 @@ export const typeList: QuestionTypeElement[] = [
   },
   {
     label: 'Выпадающий список',
-    value: 'dropdown',
+    value: 'select',
     initialValue: initialValuesCheckbox
   },
   {

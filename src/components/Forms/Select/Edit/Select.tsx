@@ -1,20 +1,18 @@
 import { ChangeEvent, FC } from 'react';
 import {
   FormControl,
-  RadioGroup,
   TextField as TextFieldMUI,
   IconButton,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 import { surveySlice } from 'store/reducers/SurveySlice';
 import { useAppDispatch } from 'hooks/redux';
-import { RadioProps } from '../types';
+import { SelectProps } from '../types';
 
-import styles from './Radio.module.scss';
+import styles from './Select.module.scss';
 
-const Radio: FC<RadioProps> = ({ question = 'Без названия', items, index }) => {
+const Select: FC<SelectProps> = ({ question = 'Без названия', items, index }) => {
   const { setQuestionProperty } = surveySlice.actions;
   const dispatch = useAppDispatch();
 
@@ -26,7 +24,7 @@ const Radio: FC<RadioProps> = ({ question = 'Без названия', items, in
       dispatch(setQuestionProperty({
         index, 
         value: {
-          type: 'radio',
+          type: 'select',
           question: {
             question,
             items: newItems
@@ -49,7 +47,7 @@ const Radio: FC<RadioProps> = ({ question = 'Без названия', items, in
       dispatch(setQuestionProperty({
         index, 
         value: {
-          type: 'radio',
+          type: 'select',
           question: {
             question,
             items: newItems
@@ -69,7 +67,7 @@ const Radio: FC<RadioProps> = ({ question = 'Без названия', items, in
       dispatch(setQuestionProperty({
         index, 
         value: {
-          type: 'radio',
+          type: 'select',
           question: {
             question,
             items: newItems
@@ -82,10 +80,10 @@ const Radio: FC<RadioProps> = ({ question = 'Без названия', items, in
   return (
     <div className={styles.container}>
       <FormControl size='small' className={styles.form}>
-        <RadioGroup className={styles.radios}>
+        <ol className={styles.items}>
           {items?.map((item, index) => (
             <li key={index}>
-              <RadioButtonUncheckedIcon/>
+              <span>{index + 1}.</span>
 
               <TextFieldMUI
                 variant='standard'
@@ -112,10 +110,10 @@ const Radio: FC<RadioProps> = ({ question = 'Без названия', items, in
               value='Добавить вариант'
             />
           </li>
-        </RadioGroup>
+        </ol>
       </FormControl>
     </div>
   );
 };
 
-export default Radio;
+export default Select;

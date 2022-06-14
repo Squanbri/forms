@@ -2,5 +2,7 @@ import { CheckBoxProps } from './types';
 
 export const initialValuesCheckbox: CheckBoxProps = {
   question: 'Вопрос',
-  items: []
+  items: [
+    { text: 'Вариант 1' }
+  ]
 }

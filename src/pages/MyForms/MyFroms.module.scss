@@ -51,3 +51,20 @@
   font-size: 82px !important;
   font-weight: 800;
 }
+
+.myFormsBodyTitle {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.myFormsBody {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px 20px;
+}
+
+.myFormCard {
+  // gap: 20px;
+}

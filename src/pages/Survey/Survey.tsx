@@ -17,7 +17,6 @@ const Survey: FC = () => {
 
   useEffect(() => {
     if (data !== undefined) {
-      console.log(data.id)
       dispatch(setSurvey({
         formId: data.id,
         isEditMode: data.userId,
