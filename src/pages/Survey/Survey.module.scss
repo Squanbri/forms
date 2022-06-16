@@ -5,6 +5,7 @@
   background-color: $c_white;
   border-radius: 10px;
   border: $b_border;
+  padding-top: 25px;
 }
 
 .buttons {
@@ -12,4 +13,8 @@
   justify-content: space-between;
   margin-bottom: 25px;
   padding: 0 25px;
+}
+
+.disabled {
+  pointer-events: none;
 }

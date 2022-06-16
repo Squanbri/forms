@@ -9,10 +9,12 @@ export interface QuestionProps {
   type: QuestionTypes,
   question: IQuestion,
   index: number,
+  value?: string,
 }
 
 export interface IQuestion {
   type: QuestionTypes,
   question: QuestionVariants,
   require?: boolean,
+  value?: string,
 }

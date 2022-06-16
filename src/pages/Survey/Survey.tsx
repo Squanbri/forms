@@ -2,22 +2,28 @@ import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useGetFormQuery } from 'services/FormService';
+import { surveySlice } from 'store/reducers/SurveySlice';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import SurveyTitle from 'components/Survey/SurveyTitle/SurveyTitle';
 import QuestionList from './QuestionList';
 import SurveyButtons from './SurveyButtons';
-import { surveySlice } from 'store/reducers/SurveySlice';
-import { useAppDispatch } from 'hooks/redux';
+import SurveyTools from 'components/Survey/SurveyTools/SurveyTools';
+import AnswerSwitch from 'components/Survey/AnswerSwitch/AnswerSwitch';
 import styles from './Survey.module.scss';
 
 const Survey: FC = () => {
   const { id } = useParams() as { id: string };
   const { setSurvey } = surveySlice.actions;
   const dispatch = useAppDispatch();
+  const { isAnswersMode } = useAppSelector(state => state.surveyReducer);
   const { data, isLoading } = useGetFormQuery(id);
 
   useEffect(() => {
     if (data !== undefined) {
       dispatch(setSurvey({
+        answers: data?.answers ?? [],
+        isAnswersMode: false,
+        answerIndex: 0,
         formId: data.id,
         isEditMode: data.userId,
         title: data.content.title,
@@ -27,8 +33,22 @@ const Survey: FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
-
+  
   if (isLoading) return <div>Загрузка...</div>
+
+  if (isAnswersMode) {
+    return (
+      <section className={styles.survey}>
+        <form>
+          <AnswerSwitch />
+
+          <QuestionList />
+
+          <SurveyTools />
+        </form>
+      </section>
+    )
+  }
 
   return (
     <section className={styles.survey}>
@@ -38,6 +58,8 @@ const Survey: FC = () => {
         <QuestionList />
 
         <SurveyButtons />
+
+        <SurveyTools />
       </form>
     </section>
   );

@@ -1,12 +1,11 @@
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
 import { IconButton, Switch, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { surveySlice } from 'store/reducers/SurveySlice';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { useAppDispatch } from 'hooks/redux';
 import { QuestionToolsProps } from './types';
-
 import styles from './QuestionTools.module.scss';
 
 const QuestionTools: FC<QuestionToolsProps> = ({ index, question }) => {

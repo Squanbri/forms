@@ -1,5 +1,6 @@
 type radioItem = {
-  text: string
+  text: string,
+  checked?: boolean
 }
 
 export interface RadioProps {

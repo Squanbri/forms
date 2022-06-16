@@ -7,6 +7,7 @@ interface IForm {
   userId: boolean;
   createdAt: string;
   updatedAt: string;
+  answers?: object[];
 }
 
 interface IFormContent {

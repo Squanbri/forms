@@ -41,7 +41,8 @@ const Select: FC<SelectProps> = ({ question = 'Без названия', items, 
     if (index !== undefined && typeof items === 'object') {
       const newItems = [...items];
       newItems.splice(opinionIndex, 1, {
-        text: event.target.value
+        text: event.target.value,
+        checked: opinionIndex === 0
       });
       
       dispatch(setQuestionProperty({
@@ -60,9 +61,16 @@ const Select: FC<SelectProps> = ({ question = 'Без названия', items, 
   const onAddOpinion = () => {
     if (index !== undefined && typeof items === 'object') {
       const newOpinion = {
-        text: `Вариант ${items?.length + 1}`
+        text: `Вариант ${items?.length + 1}`,
+        checked: false,
       }
-      const newItems = [...items, newOpinion];
+      const newItems = items.map((item, index) => {
+        if (index === 0) {
+          return { ...item, checked: true }
+        } else {
+          return { ...item, checked: false}
+        }
+      }).push(newOpinion);
 
       dispatch(setQuestionProperty({
         index, 

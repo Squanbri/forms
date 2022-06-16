@@ -1,9 +1,10 @@
 type checkBoxItem = {
-  text: string
+  text: string;
+  checked?: boolean;
 }
 
 export interface CheckBoxProps {
-  question?: string,
-  items?: checkBoxItem[],
-  index?: number,
+  question?: string;
+  items?: checkBoxItem[];
+  index?: number;
 }

@@ -3,12 +3,14 @@ import { authApi } from '../services/AuthService';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authReducer from './reducers/AuthSlice';
 import surveyReducer from './reducers/SurveySlice';
+import { answerApi } from 'services/AnswersService';
 
 const rootReducer = combineReducers({
   authReducer,
   surveyReducer,
   [authApi.reducerPath]: authApi.reducer,
   [formApi.reducerPath]: formApi.reducer,
+  [answerApi.reducerPath]: answerApi.reducer,
 });
 
 export const setupStore = () => {
@@ -17,7 +19,8 @@ export const setupStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat([
         authApi.middleware, 
-        formApi.middleware
+        formApi.middleware,
+        answerApi.middleware,
       ])
   });
 }

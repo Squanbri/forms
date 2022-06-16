@@ -32,8 +32,8 @@ export const questionTypeComponents = {
     read: <SelectRead/>,
     edit: <SelectEdit/>
   },
-  // date: {
-  //   read: <DatePickerRead/>,
-  //   edit: <DatePickerEdit/>
-  // }
+  date: {
+    read: <DatePickerRead/>,
+    edit: <DatePickerEdit/>
+  }
 }

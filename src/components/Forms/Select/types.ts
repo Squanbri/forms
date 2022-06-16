@@ -1,9 +1,10 @@
-type radioItem = {
-  text: string
+type selectItem = {
+  text: string,
+  checked?: boolean
 }
 
 export interface SelectProps {
   question?: string,
-  items?: radioItem[],
+  items?: selectItem[],
   index?: number,
 }

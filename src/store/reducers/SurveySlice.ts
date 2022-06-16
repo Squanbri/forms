@@ -3,6 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IQuestion } from 'components/Survey/Question/types';
 
 interface SurveyState {
+  answers?: object[];
+  isAnswersMode: boolean;
+  answerIndex: number;
   isEditMode: boolean;
   formId: string;
   title: string;
@@ -11,7 +14,10 @@ interface SurveyState {
 }
 
 const initialState: SurveyState = {
+  answers: [],
   formId: '',
+  isAnswersMode: false,
+  answerIndex: 0,
   isEditMode: false,
   title: 'Название опроса',
   editableQuestion: null,
@@ -22,7 +28,15 @@ export const surveySlice = createSlice({
   name: 'survey',
   initialState,
   reducers: {
+    changeAnswerMode(state, action: PayloadAction<boolean>) {
+      state.isAnswersMode = action.payload;
+      state.editableQuestion = null;
+    },
+    setAnswerIndex(state, action: PayloadAction<number>) {
+      state.answerIndex = action.payload;
+    },
     setSurvey(state, action: PayloadAction<SurveyState>) {
+      state.answers = action.payload.answers;
       state.formId = action.payload.formId;
       state.isEditMode = action.payload.isEditMode;
       state.title = action.payload.title;

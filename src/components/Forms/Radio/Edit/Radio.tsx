@@ -11,7 +11,6 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { surveySlice } from 'store/reducers/SurveySlice';
 import { useAppDispatch } from 'hooks/redux';
 import { RadioProps } from '../types';
-
 import styles from './Radio.module.scss';
 
 const Radio: FC<RadioProps> = ({ question = 'Без названия', items, index }) => {
