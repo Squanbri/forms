@@ -41,6 +41,11 @@ const SurveyButtons: FC = () => {
         questions,
       },
     });
+
+    dispatch(setSnackbarProperty({
+      text: 'Форма отправлена', 
+      active: true
+    }));
   };
 
   return (
