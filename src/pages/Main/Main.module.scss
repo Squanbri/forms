@@ -16,6 +16,10 @@
   width: 55vw;
   padding-left: 20vw;
   padding-top: 22.5vh;
+
+  @media (max-width: 1245px) { 
+    padding-left: 10vw;
+  }
 }
 
 .header  {
@@ -31,6 +35,11 @@
     background: linear-gradient(to right, #007FFF, #0059B2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  @media (max-width: 1245px) { 
+    font-size: 42px !important;
+    width: 400px;
   }
 }
 
