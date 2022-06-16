@@ -1,18 +1,20 @@
 import { FC } from 'react';
 import { Button } from '@mui/material';
 
-import { useAppSelector } from 'hooks/redux';
-import SurveyTools from 'components/Survey/SurveyTools/SurveyTools';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useUpdateFormMutation } from 'services/FormService';
 import { useAddAnswerMutation } from 'services/AnswersService';
 import styles from './Survey.module.scss';
+import { surveySlice } from 'store/reducers/SurveySlice';
 
 const SurveyButtons: FC = () => {
   const { isEditMode, title, questions, formId } = useAppSelector(
     (state) => state.surveyReducer
   );
+  const { setSnackbarProperty } = surveySlice.actions;
   const [updateForm] = useUpdateFormMutation();
   const [addAnswer] = useAddAnswerMutation();
+  const dispatch = useAppDispatch();
 
   const onSave = () => {
     updateForm({
@@ -23,6 +25,11 @@ const SurveyButtons: FC = () => {
         questions,
       },
     });
+
+    dispatch(setSnackbarProperty({
+      text: 'Форма сохранена', 
+      active: true
+    }));
   };
 
   const onAnswer = () => {

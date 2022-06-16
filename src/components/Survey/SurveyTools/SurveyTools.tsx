@@ -3,17 +3,24 @@ import { Badge, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import QuizIcon from '@mui/icons-material/Quiz';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { surveySlice } from 'store/reducers/SurveySlice';
 import styles from './SurveyTools.module.scss';
+import { useDeleteFormMutation } from 'services/FormService';
+import { useNavigate } from 'react-router-dom';
+import { staticLinks } from 'assets/exportData/links';
 
 const SurveyTools: FC = () => {
-  const { isEditMode, isAnswersMode } = useAppSelector(
+  const { answers, formId, isEditMode, isAnswersMode } = useAppSelector(
     (state) => state.surveyReducer
   );
   const { addQuestion, changeAnswerMode } = surveySlice.actions;
   const dispatch = useAppDispatch();
+  const [deleteForm] = useDeleteFormMutation();
+  const navigate = useNavigate();
+  const answersCount = answers?.length as number; 
 
   const onClickAdd = () => {
     dispatch(
@@ -31,6 +38,11 @@ const SurveyTools: FC = () => {
     dispatch(changeAnswerMode(!isAnswersMode));
   };
 
+  const onDeleteForm = () => {
+    deleteForm(formId);
+    navigate(staticLinks.myForms);
+  }
+
   if (isEditMode === false) return null;
 
   if (!isAnswersMode) {
@@ -43,14 +55,23 @@ const SurveyTools: FC = () => {
         >
           <AddIcon fontSize='small' />
         </IconButton>
+        {answersCount > 0 &&
+          <IconButton
+            aria-label='cart'
+            title={'Посмотреть ответы'}
+            onClick={onToggleAnswers}
+          >
+            <Badge badgeContent={answersCount} color='primary' className={styles.badge}>
+              <QuestionAnswerIcon fontSize='small' />
+            </Badge>
+          </IconButton>
+        }
         <IconButton
           aria-label='cart'
-          title={'Посмотреть ответы'}
-          onClick={onToggleAnswers}
+          title={'Удалить форму опроса'}
+          onClick={onDeleteForm}
         >
-          <Badge badgeContent={4} color='primary' className={styles.badge}>
-            <QuestionAnswerIcon fontSize='small' />
-          </Badge>
+          <DeleteIcon fontSize='small' />
         </IconButton>
       </div>
     );

@@ -1,11 +1,15 @@
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { staticLinks } from 'assets/exportData/links';
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import mainImg from 'assets/images/main2.png';
 import styles from './Main.module.scss';
+import { useAppSelector } from 'hooks/redux';
 
 const Main: FC = () => {
+  const { isAuth } = useAppSelector(state => state.authReducer);
+
   return (
     <section className={styles.main}>
       <div className={styles.left}>
@@ -21,15 +25,14 @@ const Main: FC = () => {
           components.
         </p>
 
-        <NavLink 
-          to={staticLinks.forms} 
-          className={styles.linkStart}
-        > 
+        <NavLink to={isAuth ? staticLinks.myForms : staticLinks.auth} className={styles.linkStart}>
           Попробовать &rarr;
         </NavLink>
       </div>
 
-      <div className={styles.right}></div>
+      <div className={styles.right}>
+        <img src={mainImg} alt='Изображение формы опроса' />
+      </div>
     </section>
   );
 };

@@ -68,15 +68,21 @@
 }
 
 .right {
-  display: block;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+
   position: absolute;
   right: 0;
   width: 45vw;
   height: 85%;
   background-color: $c_grey;
   border-bottom-left-radius: 25px;
+  border: $b_border;
 
-  -webkit-box-shadow: 3px -3px 8px 3px rgba(34, 60, 80, 0.2) inset;
-  -moz-box-shadow: 3px -3px 8px 3px rgba(34, 60, 80, 0.2) inset;
-  box-shadow: 3px -3px 8px 3px rgba(34, 60, 80, 0.2) inset;
+  // -webkit-box-shadow: 3px -3px 8px 3px rgba(34, 60, 80, 0.2);
+  // -moz-box-shadow: 3px -3px 8px 3px rgba(34, 60, 80, 0.2);
+  // box-shadow: 3px -3px 8px 3px rgba(34, 60, 80, 0.2);
+
+  overflow: hidden;
 }

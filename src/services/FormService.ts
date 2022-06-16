@@ -19,6 +19,7 @@ interface IFormContent {
 export const formApi = createApi({
   reducerPath: 'formApi',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BACKEND_URL }),
+  tagTypes: ['Form'],
   endpoints: (build) => ({
     getForm: build.query<IForm, string>({
       query: (id) => ({
@@ -36,7 +37,8 @@ export const formApi = createApi({
         headers: {
           'authorization': `Bearer ${localStorage.getItem('token_auth')}`
         }
-      })
+      }),
+      providesTags: result => ['Form']
     }),
     addForm: build.mutation<IForm, IFormContent>({
       query: (form) => ({
@@ -46,7 +48,8 @@ export const formApi = createApi({
           'authorization': `Bearer ${localStorage.getItem('token_auth')}`
         },
         body: form
-      })
+      }),
+      invalidatesTags: ['Form']
     }),
     updateForm: build.mutation<
       IForm, 
@@ -61,6 +64,20 @@ export const formApi = createApi({
         body: form
       })
     }),
+    deleteForm: build.mutation<
+      void, 
+      string
+    >({
+      query: (formId) => ({
+        url: '/forms',
+        method: 'DELETE',
+        headers: {
+          'authorization': `Bearer ${localStorage.getItem('token_auth')}`
+        },
+        body: {formId}
+      }),
+      invalidatesTags: ['Form']
+    }),
   })
 })
 
@@ -68,5 +85,6 @@ export const {
   useGetFormQuery,
   useGetMyFormsQuery,
   useAddFormMutation,
-  useUpdateFormMutation
+  useUpdateFormMutation,
+  useDeleteFormMutation
 } = formApi;

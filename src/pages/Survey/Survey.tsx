@@ -9,6 +9,7 @@ import QuestionList from './QuestionList';
 import SurveyButtons from './SurveyButtons';
 import SurveyTools from 'components/Survey/SurveyTools/SurveyTools';
 import AnswerSwitch from 'components/Survey/AnswerSwitch/AnswerSwitch';
+import Snackbar from 'components/Survey/Snackbar/Snackbar';
 import styles from './Survey.module.scss';
 
 const Survey: FC = () => {
@@ -21,6 +22,8 @@ const Survey: FC = () => {
   useEffect(() => {
     if (data !== undefined) {
       dispatch(setSurvey({
+        snackbarText: '',
+        snackbarActive: false,
         answers: data?.answers ?? [],
         isAnswersMode: false,
         answerIndex: 0,
@@ -60,6 +63,8 @@ const Survey: FC = () => {
         <SurveyButtons />
 
         <SurveyTools />
+
+        <Snackbar />
       </form>
     </section>
   );

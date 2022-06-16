@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IQuestion } from 'components/Survey/Question/types';
 
 interface SurveyState {
+  snackbarText: string;
+  snackbarActive: boolean;
   answers?: object[];
   isAnswersMode: boolean;
   answerIndex: number;
@@ -14,6 +16,8 @@ interface SurveyState {
 }
 
 const initialState: SurveyState = {
+  snackbarText: '',
+  snackbarActive: false,
   answers: [],
   formId: '',
   isAnswersMode: false,
@@ -71,7 +75,11 @@ export const surveySlice = createSlice({
         ...state.questions[action.payload.index], 
         ...action.payload.value
       };
-    }
+    },
+    setSnackbarProperty(state, action: PayloadAction<{ text: string, active: boolean }>) {
+      state.snackbarActive = action.payload.active;
+      state.snackbarText = action.payload.text;
+    },
   }
 });
 
